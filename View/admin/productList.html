@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分类列表</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        body{
+            padding-top: 34px;
+        }
+        table{
+            text-align: center;
+
+        }
+        .head-ol{
+            width: 100%;
+
+            position: fixed;
+            top: 0px;
+            left: 0;
+        }
+        input{
+
+            border: none;
+            background-color: rgba(255,255,255,0);
+        }
+        .nulls{
+            font-size: 30px;
+            color: black;
+            font-weight: bold;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="head-ol">
+    <ol class="breadcrumb" >
+        <li><a href="javascript:void(0);">首页</a></li>
+        <li><a href="javascript:void(0);">分类管理</a></li>
+        <li class="active">产品分类列表</li>
+    </ol>
+</div>
+
+<table class="table table-striped <?php echo count($resout)?'':'hidden'; ?>">
+    <tr>
+        <th>序 号</th>
+        <th>产品名称</th>
+        <th>产品分类</th>
+        <th>缩略图地址</th>
+        <th>市场价格</th>
+        <th>零售价格</th>
+        <th>库存容量</th>
+        <th>轮播图地址</th>
+        <th>商品描述</th>
+        <th>上架时间</th>
+        <th>操作</th>
+    </tr>
+    <tbody>
+    <?php
+    foreach($resout as $key=>$value){
+    ?>
+    <tr id="<?php   echo $value['id']; ?>">
+
+        <td>
+            <?php
+           echo $value['id']
+            ?>
+
+        </td>
+        <td>
+            <input name="gname" data-value="<?php
+           echo $value['gname'];?>" type="text" value="  <?php
+           echo $value['gname'];
+            ?>">
+
+        </td>
+        <td>
+            <input name="gfname" data-value="<?php
+           echo $value['gfname'];?>" type="text" value="  <?php
+           echo $value['gfname'];
+            ?>">
+        </td>
+        <td>
+            <img src="<?php
+           echo $value['thumb'];?>" alt="" style="height: 22px; width: 48px">
+<!--            <input name="thumb" data-value="<?php-->
+<!--           echo $value['thumb'];?>" type="text" value="  <?php-->
+<!--           echo $value['thumb'];-->
+<!--            ?>">-->
+
+        </td>
+        <td>
+            <input name="nsmp" data-value="<?php
+           echo $value['nsmp'];?>" type="text" value="  <?php
+           echo $value['nsmp'];
+            ?>">
+
+        </td>
+        <td>
+            <input name="sale" data-value="<?php
+           echo $value['sale'];?>" type="text" value="  <?php
+           echo $value['sale'];
+            ?>">
+
+        </td>
+        <td>
+            <input name="stock" data-value="<?php
+           echo $value['stock'];?>" type="text" value="  <?php
+           echo $value['stock'];
+            ?>">
+        </td>
+        <td>
+<!--            <img src="<?php-->
+<!--           echo $value['thumb'];?>" alt="" style="height: 22px; width: 48px">-->
+<!--            <img src="<?php-->
+<!--           echo $value['banner'];?>" alt="" style="height: 22px; width: 48px">-->
+            <?php
+            $arr = explode(",",$value['banner']);
+                   for($i=0;$i<count($arr);$i++){
+                  ?>
+            <img src="<?php echo $arr[$i]?>" alt="" style="height: 22px; width: 48px;">
+            <?php
+                   }
+?>
+<!--            <input name="banner" data-value="<?php-->
+<!--           echo $value['banner'];?>" type="text" value="  <?php-->
+<!--           echo $value['banner'];-->
+<!--            ?>">-->
+
+        </td>
+        <td>
+            <input name="datall" data-value="<?php
+           echo $value['datall'];?>" type="text" value="  <?php
+           echo $value['datall'];
+            ?>">
+
+        </td>
+        <td>
+            <input name="create_time" data-value="<?php
+           echo $value['create_time'];?>" type="text" value="  <?php
+           echo $value['create_time'];
+            ?>">
+
+        </td>
+
+        <td>
+            <div >
+<!--                 <?php
+           echo $value['id']
+            ?>-->
+                <a href="updateproductList.php?id=<?php echo $value['id']?>" class="btn btn-danger" style="display: block; float: left">编辑</a>
+                <button class="btn btn-danger" style="display: block;float: right">删除</button>
+            </div>
+        </td>
+    </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>
+<div class="<?php echo count($resout)?'hidden':''; ?>">
+    没有数据了
+</div>
+</body>
+</html>
+<script>
+    $("tbody").on("click","button",function(){
+       let id =  $(this).closest("tr").attr("id");
+       $.ajax({
+         type:"POST",
+           url:"delproductList.php",
+           data:{
+             "id":id
+           },
+           dataType:"json",
+           context:this,
+           success:function(res){
+           if(res.success == 200){
+                alert(res.font);
+                $("#"+id).remove();
+           }
+           else{
+               alert(res.font);
+           }
+           }
+       });
+        return false;
+    });
+</script>

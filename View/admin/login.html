@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/jquery-3.4.1.min.js"></script>
+    <title>Document</title>
+    <style>
+        html,body{
+            height: 100%;
+            width: 100%;
+            background-image: url("../static/image/2055-1Z52116140214.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+        .panel-success{
+            width: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+        }
+        .panel-success>.panel-heading{
+            text-align: center;
+            color: black;
+
+        }
+    </style>
+</head>
+<body>
+<div class="panel panel-success">
+    <div class="panel-heading">
+       欢迎登管理系统
+    </div>
+    <div class="panel-body">
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="username" name="username" class="form-control" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-default">登陆</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+<script>
+<!-- 获取表单form-->
+    $("form").on("submit",function (e) {
+
+        let datas = $(this).serialize();
+        $.ajax({
+            type:"POST",
+            url:"login.php",
+            dataType:"json",
+            data:datas,
+            success:function(res){
+             if(res.success===200){
+                  location.replace("../admin/adminindex.php");
+             }
+             if(res.success===500){
+                  alert(res.font);
+             }
+            }
+        });
+        return false;
+    });
+</script>

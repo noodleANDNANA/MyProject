@@ -1,0 +1,345 @@
+ul,
+li,
+body {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: #333333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+
+}
+.foot{
+    /* margin: 0 auto; */
+    width: 970px;
+    height: 37px;
+    background-color: #f0443a;
+    color: #fff;
+    text-align: center;
+    line-height: 37px;
+    position: fixed;
+    /* left: 0; */
+    bottom: 0;
+    display: none;
+}
+/* 头部开始 */
+.header {
+    width: 100%;
+    height: 90px;
+    background-color: #000;
+}
+
+/* 头部结束 */
+
+/* 内容主体部分开始 */
+.content {
+    max-width: 1024px;
+    /* height: 896px; */
+    /* background-color: rgb(214, 214, 214); */
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 80px;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+}
+
+/* 内容主体部分结束 */
+
+/* banner 图开始 */
+.banner {
+    width: 100%;
+    height: 28vh;
+    min-height: 25px;
+    /* background-color: rgb(184,184, 184); */
+    overflow: hidden;
+    background-image: url(../image/新闻资讯.jpg);
+    background-size: 100%;
+}
+
+
+/* banner 图结束 */
+
+/* 文字大标题开始 */
+.title {
+    width: 100%;
+    height: 105px;
+    padding-top: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    /* background-color: rgb(156, 156, 156); */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    /* vertical-align: bottom; */
+}
+.title span {
+    width: 428px;
+    height: 1px;
+    background-color: #d6d6d6;
+    
+    display: inline-block;
+
+}
+
+.tit-left {
+    max-width: 428px;
+    line-height: 55px;
+    height: 63px;
+    /* float: left; */
+    overflow: hidden;
+}
+
+.tit-right {
+    max-width: 428px;
+    height: 65px;
+    line-height: 55px;
+    /* float: right; */
+    overflow: hidden;
+}
+
+.title-wz {
+    max-width: 140px;
+    height: 42px;
+    float: left;
+    margin: 0 20px;
+    text-align: center;
+    line-height: 20px;
+    /* vertical-align: bottom; */
+}
+
+.title-wz h4:first-child {
+    width: 128px;
+    height: 40px;
+    font-size: 32px;
+    font-weight: normal;
+    font-style: normal;
+    color: #333333;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title-wz h4:last-child {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    color: #a5a5a5;
+    display: block;
+    padding: 2px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* 文字大标题结束 */
+
+/* 文字的内容开始 */
+.content-box {
+    margin: 0 auto;
+    max-width: 965px;
+    margin-top: 20px;
+    padding: 0 15px;
+    padding-top: 40px;
+    box-sizing: border-box;
+}
+
+.content-title {
+    height: 42px;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: normal;
+    font-style: normal;
+    color: #000;
+    text-align: center;
+}
+
+.content-time {
+    margin: 0 auto;
+    max-width: 965px;
+    height: 61px;
+    padding-bottom: 40px;
+    color: #878787;
+    text-align: center;
+    font-size: 14px;
+}
+
+.content-tex {
+    margin: 0 auto;
+    font-size: 14px;
+    max-width: 965px;
+}
+
+.content-tex p {
+    max-width: 964px;
+
+    margin-bottom: 18px;
+}
+
+.lianjie {
+    margin: 0 auto;
+    max-width: 964px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    height: 122px;
+}
+
+.lianjie-l span {
+    margin-right: 10px;
+}
+
+.lianjie-l {
+    float: left;
+    text-align: left;
+}
+
+.lianjie-r {
+    float: right;
+    text-align: right;
+}
+
+.lianjie-l,
+.lianjie-r {
+    width: 50%;
+    height: 42px;
+    padding: 10px;
+    
+}
+.lianjie-l span,
+.lianjie-r span{
+    color: #f0443a;
+
+}
+.back {
+    margin: 0 auto;
+    max-width: 974px;
+    height: 49px;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+
+.backbtn {
+    margin: 0 auto;
+    max-width: 98px;
+    height: 49px;
+    color: #2a2a2a;
+    /* border-color: #2a2a2a; */
+    border: 2px solid #2a2a2a;
+    text-align: center;
+    line-height: 49px;
+    transition: all 0.3s;
+}
+
+.backbtn:hover {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+/* 文字的内容结束 */
+
+/* 底图开始 */
+.foot-img {
+    max-width: 974px;
+    /* width: 100%; */
+    min-width: 103px;
+    height: 30vh;
+    padding-top: 56px;
+    margin: 0 auto;
+    margin-top: 10px;
+    box-sizing: border-box;
+    /* background-color: rgb(112, 112, 112); */
+    overflow: hidden;
+    background-image: url(../image/新闻资讯1.jpg);
+    background-size: 100%;
+    /* background-image: url(../image/新闻资讯1.jpg) */
+}
+
+
+
+/* 底图结束 */
+
+footer {
+    width: 100%;
+    height: 296px;
+    background-color: #242424;
+}
+
+
+/* 响应式 */
+/* @media (max-width: 993px) {
+    .min-menu {
+        display: block;
+    }
+
+    .nav-menu {
+        transform: rotateX(90deg);
+        transition: all .5s;
+    }
+} */
+
+@media (max-width: 1000px) {
+    .lianjie-r {
+        clear: left;
+        float:none;
+        text-align: left;
+
+    }
+    .lianjie-r span:last-child {
+        float: left;
+        margin-right: 15px;
+    }
+    /* .lianjie-r span:first-child{
+        float: right;
+    } */
+    .content-box {
+        max-width: 768px;
+        /* height: 571px; */
+    }
+    .foot-img {
+        height: 15vh;
+        transition: all .5s;
+
+    }
+    .foot {
+        display: block;
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    .title-wz h4:first-child {
+        font-size: 20px;
+        height: 30px;
+        transition: all .5s;
+    }
+    .title-wz h4:last-child {
+    font-size: 20px;
+    transition: all .5s;
+    }
+    .title span{
+        max-width: 30vw;
+    }
+    .content-title {
+        font-size: 20px;
+        transition: all 0.3s;
+    }
+}
+
+@media (max-width: 282px) {
+    .banner {
+        height: 10vh;
+    }
+
+
+    .foot-img {
+
+        height: 8vh;
+        transition: all .5s;
+
+    }
+}
+

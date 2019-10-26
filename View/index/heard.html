@@ -1,0 +1,76 @@
+<!doctype html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主页</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/animate.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/public.css">
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/public.js"></script>
+</head>
+<body>
+
+<!-- 导航开始 -->
+<!-- 顶部导航 开始 -->
+<nav class="posit" style="background-color: rgba(0,0,0,.5)">
+    <div class="nav-box">
+        <div class="navl">
+            <img src="../static/image/首页/logo.png" alt="">
+        </div>
+            <ul class="navr">
+                <?php foreach($data as $key=>$value){?>
+                <li>
+                    <!--                updateNews.php?id=<?php echo $value['nid']?>-->
+                    <a href="jump.php?id=<?php echo $value['lid']?>"><?php echo $value['lname'] ?></a>
+                </li>
+                <?php
+            }
+            ?>
+        </ul>
+    </div>
+</nav>
+<!-- 顶部导航 结束 -->
+<!-- 屏幕滚动出现 开始 -->
+<nav class="xiala-nav">
+    <div class="nav-box">
+        <div class="navl">
+            <img src="../static/image/首页/logo.png" alt="">
+
+        </div>
+        <ul class="navr">
+            <?php foreach($data as $key=>$value){?>
+            <li>
+                <a href="jump.php?id=<?php echo $value['lid']?>"><?php echo $value['lname']?></a>
+            </li>
+            <?php
+            }
+            ?>
+        </ul>
+    </div>
+</nav>
+<!-- 屏幕缩小后出现的下拉列表 开始 -->
+<a href="#">        <!-- 屏幕滚动出现 结束 -->
+
+    <div class="nav-list">
+        <div class="shouy">首页</div>
+        <div class="shouy-xiala">∨</div>
+    </div>
+</a>
+<ul class="xialakuang" style="display: none;">
+    <?php foreach($data as $key=>$value){?>
+    <li>
+        <a href="../index/jump.php?id=$value['gid']"><?php echo $value['gname']?></a>
+    </li>
+    <?php
+            }
+            ?>
+</ul>
+<!-- 屏幕缩小后出现的下拉列表 结束 -->
+</body>
+</html>

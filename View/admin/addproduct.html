@@ -1,0 +1,200 @@
+ <!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加产品</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .big-box{
+            padding-top: 10px;
+        }
+        div label{
+
+            float: left;
+        }
+        img{
+            height: 200px;
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0);">首页</a></li>
+    <li><a href="javascript:void(0);">产品管理</a></li>
+    <li class="active">产品添加</li>
+</ol>
+<div class="btn container big-box">
+
+    <div class="row">
+        <!--  navigationNames    navigationENames   nsort   ntpl -->
+        <form class="col-lg-8 col-lg-offset-2">
+            <div class="form-group">
+                <label for="gname">产品名称</label>
+                <input type="text" name="gname" class="form-control" id="gname" placeholder="产品名称">
+            </div>
+            <div class="form-group">
+                <label for="gname">产品分类</label>
+                <select name="gid" id="gid">
+                    <?php
+                    foreach($data as $key=>$value){
+                    ?>
+                    <option value="<?php echo $value['gid']; ?>"><?php
+                        echo $value['gname'];?>
+                    </option>
+
+                    <?php
+                    }
+                       ?>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="thumb">缩略图</label>
+                <input type="text" class="hidden" id="thumb" name="thumb" value="">
+                <input type="file" accept="image/*" name="thumbs" class="form-control" id="thumbs" style="border: 0;border-color: white;">
+                <img src="" alt="" id="newimg" style=""> <span>最佳尺寸为：200X200</span>
+            </div>
+            <div class="form-group">
+                <label for="nsmp">市场价</label>
+                <input type="number" name="nsmp" class="form-control" id="nsmp" placeholder="市场价">
+            </div>
+            <div class="form-group">
+                <label for="sale">零售价</label>
+                <input type="number" name="sale" class="form-control" id="sale" placeholder="零售价">
+            </div>
+            <div class="form-group">
+                <label for="stock">库存</label>
+                <input type="number" name="stock" class="form-control" id="stock" placeholder="库存">
+            </div>
+            <div class="form-group" id="bannersimage">
+
+                <input type="hidden" name="banner" value="" id="banner">
+                <label for="banners">轮播图</label>
+                <input type="file" multiple  class="form-control" id="banners">
+            </div>
+            <div class="form-group">
+                <label for="datall">详情</label>
+                <input type="textarea" name="datall" class="form-control" id="datall" placeholder="请输入网页模板名称">
+            </div>
+            <button type="submit" class="btn btn-default">确 定</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+<script >
+$("input[name=thumbs]").on("change",function(){
+//利用fromdata发送请求
+    let filesindex = this.files[0];
+    let files = new FileReader();
+    files.readAsDataURL(filesindex);
+    let formdatas = new FormData();
+    files.onload = function (ev) {
+
+        let resluts = ev.currentTarget.result;
+        // console.log(reslut);
+
+        formdatas.append("file",filesindex);
+        // console.log(formdatas);
+       $("#newimg").attr("src",resluts);
+       let persiom = new Promise(function (resolve,reject) {
+           $.ajax({
+               type:"POST",
+               url:"obtainimg.php",
+               processData:false,
+               contentType:false,
+               data:formdatas,
+               dataType:"json",
+               success:function(res){
+                   if(res.success == 200){
+                       resolve(res);
+                   }
+                   else{
+                        reject(res.font);
+                   }
+               }
+           });
+       });
+       persiom.then(function(res){
+           alert("图片添加成功");
+           $("input[name=thumb]").attr("value",res.datapath);
+
+       },function(res){
+           alert(res.font);
+       });
+
+
+    }
+
+});
+$("input[id=banners]").on("change",function () {
+    let file = this.files;
+    let formdatas = new FormData();
+    for (let i = 0; i < file.length; i++) {
+        let files = new FileReader();
+        files.readAsDataURL(file[i]);
+        files.onload = function (ev) {
+            let resluts = ev.currentTarget.result;
+            formdatas.append("file", file[i]);
+            // console.log(formdatas.getAll("binary"));
+            $("<img>").appendTo("#bannersimage").attr("src", resluts).css({"height": "200px"}, {"width": "200px"});
+
+            $.ajax({
+                type: "POST",
+                url: "obtainimg.php",
+                processData: false,
+                contentType: false,
+                data: formdatas,
+                dataType: "json",
+                success: function (res) {
+                    if (res.success == 200) {
+                        $("input[type=hidden]").attr("value", $("input[type=hidden]").val() + res.datapath + ",");
+                        // console.log( $("input[type=hidden]").val());
+                        // alert("图片添加成功");
+                    } else {
+                        alert(res.font);
+                    }
+                }
+            });
+        }
+    }
+
+       });
+ $("form").on("submit",function(){
+     let formdatas = new FormData(this);
+     $.ajax({
+         type:"POST",
+         url:"addproduct.php",
+         processData:false,
+         contentType:false,
+         data:formdatas,
+         dataType:"json",
+         success:function(res){
+           if(res.success == 200){
+               alert("数据添加成功");
+               $("form")[0].reset();
+             $("img").remove();
+           }
+           else{
+               alert(res.font);
+               $("form")[0].reset();
+               $("img").remove()
+           }
+         }
+     });
+     return false;
+ });
+
+</script >

@@ -1,0 +1,246 @@
+ul,li{
+    list-style: none;
+
+}
+a{
+    text-decoration: none;
+    color:#000;
+}
+a:hover{
+    text-decoration: none;
+    color:#000;
+}
+a:link { text-decoration: none;} /* 未访问的链接 */
+a:visited { text-decoration: none;} /* 已访问的链接 */
+a:active { text-decoration: none;} /* 被选择的链接 */
+.main {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+.info {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+.row {
+    /*margin: 0!important;*/
+}
+.img-box{
+
+    height: 320px;
+    width: 100%;
+
+}
+.img-box img{
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (min-width:992px) {
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .row {
+        margin: 0;
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+    .service {
+        padding-top: 30px;
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width:992px) {
+    .container {
+        width: 100%;
+        margin: 0;
+    }
+    .title .row {
+        padding: 25px 15px 15px 18px;
+        box-sizing: border-box;
+    }
+
+    .ser-center{
+        max-width:768px;
+        padding:0 15px ;
+        box-sizing: border-box;
+        margin:0 auto;
+    }
+    .posit{
+        position: relative;
+
+        z-index: 9999;
+    }
+    .carousel-control{
+        display: none;
+    }
+    .carousel-indicators{
+        display: none;
+
+    }
+}
+
+@media screen and (max-width:768px) {
+    .container {
+        width: 100%;
+    }
+}
+/*标题开始*/
+/* 文字大标题开始 */
+.title {
+    width: 100%;
+    height: 105px;
+    margin: 30px auto 0;
+    /* background-color: rgb(156, 156, 156); */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    /* vertical-align: bottom; */
+}
+.title span {
+    width:35vw;
+    height: 1px;
+    background-color: #d6d6d6;;
+    display: inline-block;
+
+}
+.tit-left {
+    max-width: 428px;
+    line-height: 55px;
+    height: 63px;
+    /* float: left; */
+    overflow: hidden;
+}
+.tit-right {
+    max-width: 428px;
+    height: 65px;
+    line-height: 55px;
+    /* float: left; */
+    overflow: hidden;
+}
+.title-wz {
+    max-width: 140px;
+    height: 42px;
+    float: left;
+    margin: 0 20px;
+    text-align: center;
+    line-height: 20px;
+    /* vertical-align: bottom; */
+}
+.title-wz h4:first-child {
+    width: 128px;
+    height: 40px;
+    font-size: 32px;
+    font-weight: normal;
+    font-style: normal;
+    color: #333333;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+.title-wz h4:last-child {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    color: #a5a5a5;
+    display: block;
+    padding: 2px;
+    margin: 0 auto;
+    text-align: center;
+}
+/* 文字大标题结束 */
+/*标题结束*/
+/* service部分开始 */
+/* 每块中图片部分开始 */
+.ser-list{
+    position: relative;
+    width: 100%;
+    height: 370px;
+
+}
+
+.ser-list li{
+    float: left;
+    margin-right: 15px;
+}
+.ser-list li>a{
+    color:#f9b418;
+    font-size: 16px;
+    /*padding:5px;*/
+    /*display: block;*/
+    padding-bottom: 5px;
+}
+.ser-list li>a:hover{
+    border-bottom: 1px dotted #f9b418;
+}
+
+[class*=col]{
+    margin: 0 22px;
+    padding:0;
+}
+
+.service .row{
+    overflow: hidden;
+    /*margin-bottom: 50px;*/
+}
+.service{
+
+}
+.animated {
+    width: 284px;
+    position:relative;
+    height: 350px;
+    /*background-color: #ccc;*/
+    /*box-shadow: 0px 10px 60px 10px rgba(0,0,0,.1);*/
+}
+.service .last{
+   margin-right:0px;
+}
+.ser-box{
+    position:absolute;
+    top:50px;
+    left:0;
+    bottom:0;
+    padding:0 18px;
+    box-sizing: border-box;
+}
+
+.ser-img{
+    width: 100%;
+    height: 270px;
+}
+.ser-img img{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 5px;
+}
+.ser-img h3{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+}
+
+.ser-text h3,p{
+    padding:0;
+    margin:0;
+    text-align: center;
+}
+.ser-text h3{
+    width: 100%;
+    font-size: 20px;
+    font-family: "Arial";
+    line-height: 27px;
+    text-align: center;
+}
+.ser-text p{
+    font-size: 14px;
+    color:#999;
+}
+
+/* service部分结束 */
+
+

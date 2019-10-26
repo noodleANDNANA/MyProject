@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>添加导航</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .big-box{
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0);">首页</a></li>
+    <li><a href="javascript:void(0);">导航管理</a></li>
+    <li class="active">导航添加</li>
+</ol>
+<div class="btn container big-box">
+
+    <div class="row">
+<!--  navigationNames    navigationENames   nsort   ntpl -->
+        <form class="col-lg-8 col-lg-offset-2">
+            <div class="form-group">
+                <label for="lname">导航名称</label>
+                <input type="text" name="lname" class="form-control" id="lname" placeholder="请输入导航名称">
+            </div>
+            <div class="form-group">
+                <label for="lEname">英文名称</label>
+                <input type="text" name="lEname" class="form-control" id="lEname" placeholder="请输入导航英文名称">
+            </div>
+            <div class="form-group">
+                <label for="nsort">导航排序编码</label>
+                <input type="text" name="nsort" class="form-control" id="nsort" placeholder="请输入导航的排序编码">
+            </div>
+            <div class="form-group">
+                <label for="ntpl">网页模板名称</label>
+                <input type="text" name="ntpl" class="form-control" id="ntpl" placeholder="请输入网页模板名称">
+            </div>
+            <button type="submit" class="btn btn-default">确 定</button>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+<!--  获取所有的表单中的数据  -->
+
+    $("form").on("submit",function (e) {
+        let vname = $(this).serialize();
+
+        $.ajax({
+            type:"POST",
+            url:"newnavigation.php",
+            dataType:"json",
+            // context:this,
+            data:vname
+            ,
+            success:(res)=>{
+                if (res.success === 200){
+                    $("form")[0].reset();
+                    alert(res.font);
+
+                }
+                else{
+                    alert(res.font);
+                }
+            }
+        });
+        return false;
+    });
+</script>

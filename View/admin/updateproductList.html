@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>编辑参产品信息</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .big-box{
+            padding-top: 10px;
+        }
+        div label{
+
+            float: left;
+        }
+        img{
+            height: 200px;
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0);">首页</a></li>
+    <li><a href="javascript:void(0);">产品管理</a></li>
+    <li class="active">产品编辑</li>
+</ol>
+<div class="btn container big-box">
+
+    <div class="row">
+        <!--  navigationNames    navigationENames   nsort   ntpl -->
+        <form class="col-lg-8 col-lg-offset-2">
+            <input type="hidden" value="<?php echo $data['id']?>" name="id">
+            <input type="hidden" value="<?php echo $data['gid']?>" name="gid" old="olddata">
+            <div class="form-group">
+                <label for="gname">产品名称</label>
+                <input type="text" name="gname" value="<?php echo $data['gname']?>" class="form-control" id="gname" placeholder="产品名称">
+            </div>
+            <div class="form-group">
+                <label for="gid">产品分类</label>
+                <select name="gid" id="gid">
+                    <?php
+
+                    foreach($selectdata as $key=>$value){
+                    ?>
+                    <option value="<?php echo $value['gid']; ?>"  <?php echo $data['gid']==$value['gid']? 'selected':''?>><?php
+                        echo $value['gname'];?>
+                    </option>
+
+                    <?php
+                    }
+                       ?>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+            <label for="thumb">缩略图</label>
+            <input type="text" class="hidden" id="thumb" name="thumb" value="<?php echo $data['thumb']?>">
+            <input type="file" accept="image/*" name="thumbs" class="form-control" value="" id="thumbs" style="border: 0;border-color: white;">
+            <img src="<?php echo $data['thumb']?>" alt="" id="oldimage" style="">
+                <img src="" alt="" id="newimg" style="">
+                <span>最佳尺寸为：200X200</span>
+        </div>
+            <div class="form-group">
+                <label for="nsmp">市场价</label>
+                <input type="number" name="nsmp" value="<?php echo $data['nsmp']?>" class="form-control" id="nsmp" placeholder="市场价">
+            </div>
+            <div class="form-group">
+                <label for="sale">零售价</label>
+                <input type="number" name="sale" value="<?php echo $data['sale']?>" class="form-control" id="sale" placeholder="零售价">
+            </div>
+            <div class="form-group">
+                <label for="stock">库存</label>
+                <input type="number" name="stock" value="<?php echo $data['stock']?>" class="form-control" id="stock" placeholder="库存">
+            </div>
+            <div class="form-group" id="bannersimage">
+                <input type="hidden" name="banner" value="<?php echo $data['banner']?>" id="banner">
+                <label for="banners">轮播图</label>
+                <input type="file" multiple value="" class="form-control" id="banners">
+                 <?php
+                      $arry = explode(",",$data["banner"]);
+                        for($i=0;$i<count($arry);$i++){
+                         ?>
+                <img src="<?php echo $arry[$i]?>" alt="" name="oldimage" style="height: 200px;width: 200px;">
+                <?php
+                        }
+                       ?>
+            </div>
+            <div class="form-group">
+                <label for="datall">详情</label>
+                <textarea name="datall" id="datall" data-value="<?php echo $data['datall']?>" cols="30" class="form-control" rows="10"><?php echo $data['datall']?></textarea>
+<!--                <input type="text" name="datall" value="<?php echo $data['datall']?>" class="form-control" id="datall">-->
+            </div>
+            <button type="submit" class="btn btn-default">确 定</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $("input[name=thumbs]").on("change",function(){
+//利用fromdata发送请求
+        let filesindex = this.files[0];
+        let files = new FileReader();
+        files.readAsDataURL(filesindex);
+        let formdatas = new FormData();
+        files.onload = function (ev) {
+
+            let resluts = ev.currentTarget.result;
+            // console.log(reslut);
+            formdatas.append("file",filesindex);
+            // console.log(formdatas);
+            $("#oldimage").remove();
+            $("#newimg").attr("src",resluts);
+
+            let persiom = new Promise(function (resolve,reject) {
+                $.ajax({
+                    type:"POST",
+                    url:"obtainimg.php",
+                    processData:false,
+                    contentType:false,
+                    data:formdatas,
+                    dataType:"json",
+                    success:function(res){
+                        if(res.success == 200){
+                            resolve(res);
+                        }
+                        else{
+                            reject(res.font);
+                        }
+                    }
+                });
+            });
+            persiom.then(function(res){
+                alert("图片添加成功");
+                $("input[name=thumb]").attr("value",res.datapath);
+                console.log(res.datapath);
+            },function(res){
+                alert(res.font);
+            });
+
+
+        }
+
+    });
+    $("input[id=banners]").on("change",function () {
+        let file = this.files;
+        let formdatas = new FormData();
+        $("[name=oldimage]").remove();
+        for (let i = 0; i < file.length; i++) {
+            let files = new FileReader();
+            files.readAsDataURL(file[i]);
+            files.onload = function (ev) {
+                let resluts = ev.currentTarget.result;
+                formdatas.append("file", file[i]);
+                // console.log(formdatas.getAll("binary"));
+
+                $("<img>").appendTo("#bannersimage").attr("src", resluts).css({"height": "200px"}, {"width": "200px"});
+
+                $.ajax({
+                    type: "POST",
+                    url: "obtainimg.php",
+                    processData: false,
+                    contentType: false,
+                    data: formdatas,
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.success == 200) {
+                            $("input[id=banner]").attr("value","");
+                            $("input[id=banner]").attr("value", $("input[id=banner]").val() + res.datapath + ",");
+                            // console.log( $("input[type=hidden]").val());
+                            // alert("图片添加成功");
+                        } else {
+                            alert(res.font);
+                        }
+                    }
+                });
+            }
+        }
+
+    });
+    $("form").on("submit",function(){
+        //location.search();
+        let fromdata = new FormData(this);
+        $.ajax({
+           type:"POST",
+           url:"updateproductList.php",
+           dataType:"json",
+           data:fromdata,
+            processData:false,
+            contentType:false,
+            success:function(res){
+               console.log(res);
+               alert("修改成功");
+               $("form").reset;
+               $("img").remove();
+            }
+        });
+        return false;
+    });
+</script>

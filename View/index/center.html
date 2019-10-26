@@ -1,0 +1,163 @@
+<?php
+$mysql = new mysqli("localhost","root","","enterprise","3306");
+if($mysql->connect_error){
+echo json_encode([
+"success"=>500,
+"font"=>"数据库连接失败".$mysql->connect_error
+]);
+exit();
+}
+$mysql->query("set names utf8");
+$cate=[['gid'=>0,'gname'=>'全部']];
+$sql="select * from gclassification order by gid";
+//catenav中直接连接数据库了
+$cate1=$mysql->query($sql)->fetch_all(MYSQLI_ASSOC);
+$sql="select * from goodstable";
+$all=$mysql->query($sql)->fetch_all(MYSQLI_ASSOC);
+$cate=array_merge($cate,$cate1);
+//通过数组的拼接，然后把goodstable中的数据在加到cate中
+$len=count($cate);
+for($i=0;$i<$len;$i++){
+$item=$cate[$i];
+$id=$item['gid'];
+if($id==0){
+$cate[$i]['goods']=$all;
+continue;
+}
+//下面通过php中过滤筛选同一类别的goods,回调函数的参数操作的就是传入的数组
+$goods=array_filter($all,function ($arr) use($id){
+return $arr['gid']==$id;
+});
+$cate[$i]['goods']=$goods;
+}
+?>
+<title>产品中心</title>
+<link rel="stylesheet" href="../static/css/list.css">
+
+<script>
+    $(function () {
+        $(".ser-list").on('click','.sort', function () {
+
+            $(this).siblings('.ser-box').show().parentsUntil('ser-item').siblings().find('.ser-box').hide(); //在按钮选中时在下面显示相应的内容，同时隐藏不需要的框架内容
+        });
+        $(".sort").eq(0).trigger("click");
+
+    });
+
+</script>
+<div style="height: 100px;"></div>
+<!-- main开始 -->
+<div class="main">
+    <div class="info">
+        <section class="img">
+            <div class="container">
+                <div class="img-box">
+                    <img src="../static/image/在线预约.jpg" alt="">
+
+                </div>
+            </div>
+        </section>
+        <!--标题开始-->
+        <div class="title">
+            <div class="tit-left">
+                <span></span>
+            </div>
+            <div class="title-wz">
+                <h4>产品中心</h4>
+                <h4>ProductCenter</h4>
+            </div>
+            <div class="tit-right">
+                <span></span>
+            </div>
+            <!-- </div> -->
+        </div>
+        <!--标题开始-->
+        <!-- 四项服务部分开始 -->
+        <section class="service">
+            <div class="container">
+                <ul class="ser-list">
+                    <?php
+                     foreach($cate as $key=>$value){
+                    ?>
+                    <li class="ser-item">
+                        <a href="script:0;" class="sort"><?php echo $value['gname'];?></a>
+                        <div class="ser-box">
+                            <?php
+                             foreach($value['goods'] as $key=>$val){
+                            ?>
+                            <div class="animated col-lg-4  col-md-4 col-sm-12">
+                                <div class="ser-img">
+                                    <a href="details.php?id=<?php echo $val['id'];?>">
+                                        <img  src="<?php echo $val['thumb'] ;?>" alt="" >
+                                    </a>
+                                </div>
+
+                                    <a href="details.php?id=<?php echo $val['id'];?>">
+<!--                                        <h3><?php echo $val['gname'];?></h3>-->
+                                        <p><?php echo $val['gname'];?></p>
+                                    </a>
+
+                            </div>
+                            <?php
+                            };
+                            ?>
+                        </div>
+
+                    </li>
+                    <?php
+                    };
+                    ?>
+
+                </ul>
+
+
+            </div>
+        </section>
+        <!-- 四项服务部分结束 -->
+    </div>
+</div>
+<footer>
+    <ul>
+        <li>
+            <h1><strong>一店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+        <li>
+            <h1><strong>二店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+        <li>
+            <h1><strong>三店地址</strong></h1>
+            <h2>门店地址：上海市松江区佘山林荫大道18号</h2>
+            <h2>预约电话：<strong>400-562-6654</strong></h2>
+            <h3>营业时间</h3>
+            <h4>周一 ~周五：上午9:30-下午8:00</h4>
+            <h4>周六、周日：上午10:00-下午9:00</h4>
+        </li>
+
+    </ul>
+    <div class="bottom-tb">
+        <img src="img/common/QQ (1).png" alt="">
+        <img src="img/common/微信 (1).png" alt="">
+        <img src="img/common/微博 (1).png" alt="">
+        <img src="img/common/电话 (1).png" alt="">
+        <img src="img/common/邮箱.png" alt="">
+    </div>
+    <div class="bottom-wz">版权所有 2019-2020 汽车美容工作室 技术支持：起飞页</div>
+    <div class="bottom-zaixian"><a href="">在线预约</a></div>
+</footer>
+<!-- 站点地图结束 -->
+
+<!-- 箭头--置顶 -->
+<div class="zhiding">ʌ</div>
+<script src="../static/js/public.js"></script>
+<!-- main结束 -->
+

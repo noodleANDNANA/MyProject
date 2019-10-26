@@ -1,0 +1,212 @@
+a{
+    text-decoration: none;
+    
+}
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+/* 导航栏开始 */
+.daohang{
+
+overflow: hidden;
+    height: 90px;
+    background: #000000 none repeat center top;
+    border-bottom: 1px solid #333333;
+    padding: 0 40px;
+}
+
+.daohang-top{
+overflow: hidden;
+    height: 90px;
+
+    margin: 0 auto;
+
+
+}
+.daohang-top-left{
+    /* width: 230px; */
+    height: 90px;
+    float: left;
+    padding-right: 10px;
+
+
+}
+.daohang-top-left>img{
+    height: 52px;
+    
+}
+.daohang-top-right{
+    /* width: 784px; */
+    height: 90px;
+    float: right;
+}
+.daohang-top-right>ul{
+    height: 90px;;
+    float: right;
+    padding: 30px 0;
+    margin: 0;
+    text-align: center;
+}
+.daohang-top-right>ul>a{
+    float: left;
+}
+.daohang-top-right>ul>a>li{
+    float: left;
+    font-size: 14px;
+    color: #8d9095;
+    margin:0 25px;
+
+}
+.daohang-top-right>ul>a>li:hover{
+    color: red;
+}
+.neirong{
+    /* margin: 0 auto; */
+    /* width: 1024px;   */
+    /* margin: 0 auto; */
+    margin-top: 20px;
+    overflow: hidden;
+}
+.neirong-backgroud{
+    /* width: 1024px; */
+    /* height: 100%; */
+    background-color: red;
+    overflow: hidden;
+}
+.neirong-backgroud>img{
+    width: 100%;
+    /* height: 100%; */
+}
+
+/* 导航栏结束 */
+/* 在线开始 */
+.neirong-yuyue{
+    width: 1024px;
+    height: 125px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+/* 在线结束 */
+/* 预约信息开始 */
+.yyxx{
+    width: 1024px;
+    height: 408px;
+    background-color: yellow;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    padding-left: 0;
+}
+.yyxx-box{
+    width: 1024px;
+    height: 388px;
+    padding-top: 20px;
+
+}
+.yyxx-box-yy{
+    width: 984px;
+    height: 388px;
+    padding: 0 20px;
+}
+.yyxx-box-xxnr{
+    width: 482px;
+    height: 388px;
+    margin: 0  auto;
+    background-color: chartreuse;
+}
+/* 预约信息结束 */
+/* 尾部开始 */
+.footer{
+    /* width: 100%; */
+    height: 356px;
+    background-color: #242424;
+    padding-top: 21px;
+}
+.wf-wrap{
+    /* width: 1104px; */
+    height: 335px;
+    padding:0 40px;
+    padding-top: 20px;
+    /* background-color: red; */
+    margin: 0 auto;
+
+}
+.wf-wrap-bottom{
+    /* width: 1024px; */
+    height: 295px;
+    /* background-color: aqua; */
+    /* float: left; */
+    /* overflow: hidden; */
+    position: relative;
+}
+.wf-wrap-bottom-sp{
+    padding: 0 5px;
+    /* width: 331px; */
+    height: 197px;
+    float: left;
+
+
+}
+.wf-wrap-bottom-sp-p{
+    /* width: 331px; */
+    height: 25px;
+    color: #696969;
+    font-size: 15px;
+}
+#time{
+    font-size: 12px;
+}
+.mendiandizhi{
+    color: #ff6000;
+}
+.yinyeshijian{
+    color: #d3d3d3;
+}
+.wf-wrap-bottom-sp-p>a{
+    color: #ff6000;
+    font-size: 14px;
+}
+.wf-wrap-tubiao{
+    /* width: 1024px; */
+    height: 98px;
+    /* background-color: red; */
+    position: absolute;
+    bottom:0;
+    left: 0;
+    padding-top: 20px;
+}
+.wf-wrap-tubiao>ul{
+    /* width: 1014px; */
+    width: 210px;
+    height: 36px;
+    text-align: center;
+    /* background-color: gold; */
+    margin: 0 auto;
+}
+.wf-wrap-tubiao>ul>li{
+    width: 42px;
+    height: 36px;
+    /* font-size: 50px; */
+    float: left;
+    /* line-height: 20px; */
+
+}
+.wf-wrap-tubiao>ul>li>i{
+    /* width: 42px;
+    height: 40px; */
+    font-size: 32px;
+    /* display: inline-block; */
+    line-height: 36px;
+    padding: 0;
+    color: #c6c6c6;
+    
+}
+.wf-wrap-tubiao>p{
+    color: #c6c6c6;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 10px;
+}
+/* 尾部结束 */

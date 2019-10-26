@@ -1,0 +1,93 @@
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    /* 公共部分开始 */
+    /* 关于我们头部开始 */
+    
+    .juzhong {
+        overflow: hidden;
+        margin-top: 24px;
+    }
+    
+    .juzhong>img {
+        width: 100%;
+    }
+    /* 关于我们头部结束*/
+    /* 关于我们字体开始  */
+    
+    .wenzi {
+        position: relative;
+        overflow: hidden;
+        height: 124px;
+    }
+    
+    .xian-wenzi {
+        position: absolute;
+        top: 20px;
+        left: calc(50% - 90px);
+        width: 200px;
+        height: 64px;
+        padding-left: 10px;
+        padding-right: 10px;
+        z-index: 6;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .xian-wenzi>h3 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-size: 32px;
+    }
+    
+    .xian-wenzi>h4 {
+        margin: 0;
+        font-size: 14px;
+        color: #a5a5a5;
+    }
+    
+    .xian {
+        height: 50px;
+        border-bottom: solid 1px #d6d6d6;
+    }
+    /* 关于我们字体结束  */
+    /* 文字部分开始 */
+    
+    .xiangxi {
+        height: 334px;
+    }
+    
+    .tupian-right>img {
+        width: 100%;
+    }
+    /* .renyuan {
+        height: 308px;
+    }
+     */
+    
+    .renyuan-left {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .renyuan-left>h5 {
+        /* padding-left: 78px; */
+        text-align: center;
+        font-size: 26px;
+        font-weight: 800px;
+        padding-top: 15px;
+        /* display: flex;
+        flex-wrap: wrap; */
+    }
+    
+    .renyuan-left>p {
+        text-align: center;
+        font-size: 14px;
+    }
+    
+    .renyuan-left>img {
+        width: 100%;
+        border-radius: 50%;
+    }
+    /* 文字部分结束 */

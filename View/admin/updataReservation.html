@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑新闻</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .big-box{
+            padding-top: 10px;
+        }
+        div label{
+
+            float: left;
+        }
+        img{
+            height: 200px;
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+<ol class="breadcrumb" >
+    <li><a href="javascript:void(0);">首页</a></li>
+    <li><a href="javascript:void(0);">客户预约管理</a></li>
+    <li class="active">预约修改</li>
+</ol>
+<div class="btn container big-box">
+<!--    `rid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `date` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `sex` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `supplement` varchar(255) DEFAULT NULL,
+  `rsid` int(11) NOT NULL,-->
+    <div class="row">
+        <!--  navigationNames    navigationENames   nsort   ntpl -->
+        <form class="col-lg-8 col-lg-offset-2">
+            <input type="hidden" value="<?php echo $data['rid']?>" name="rid">
+            <div class="form-group">
+                <label for="rsid">预约类型</label>
+                <select name="rsid" id="rsid">
+                    <?php
+                    foreach($selectdata as $key=>$value){
+                    ?>
+                    <!--                     selected="selected"-->
+                    <option value="<?php echo $value['rsid']; ?>" <?php echo $data['rsid']==$value['rsid']?'selected="selected"':''?>><?php echo $value['rsname'];?>
+                    </option>
+
+                    <?php
+                    }
+                       ?>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">预约人姓名</label>
+                <input type="text" name="name" value="<?php echo $data['name']?>" class="form-control" id="name" placeholder="新闻名称">
+            </div>
+            <div class="form-group">
+                <label for="phone">联系方式</label>
+                <input type="text" name="phone" value="<?php echo $data['phone']?>" class="form-control" id="phone" placeholder="新闻名称">
+            </div>
+            <div class="form-group">
+                <label for="date">预约时间</label>
+                <input type="text" name="date" value="<?php echo $data['date']?>" class="form-control" id="date" placeholder="新闻名称">
+            </div>
+            <div class="form-group">
+                <label for="supplement">预约备注</label>
+                <!--                <input type="" class="hidden" id="ncontent" name="ncontent" value="">-->
+                <textarea name="supplement" id="supplement" cols="30" class="form-control" rows="10" ><?php echo $data['supplement']?></textarea>
+                <!--                <input type="file" accept="image/*" name="thumbs" class="form-control" id="thumbs" style="border: 0;border-color: white;">-->
+                <!--                <img src="" alt="" id="newimg" style=""> <span>最佳尺寸为：200X200</span>-->
+            </div>
+
+            <button type="submit" class="btn btn-default">确 定</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $("form").on("submit",function () {
+
+        let data = $(this).serialize();
+        //
+        $.ajax({
+            url:"updateReservation.php",
+            type:"POST",
+            dataType:"json",
+            data:data,
+            context:this,
+            success:function(res){
+                if(res.success == 200){
+                    // $("form")[0].reset();
+                    alert("数据修改成功！");
+
+                }
+                else{
+                    alert("数据修改失败！");
+                    // $("form").reset;
+                }
+            }
+        });
+        return false;
+    })
+
+</script>

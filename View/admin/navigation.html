@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>导航列表</title>
+    <style>
+        body{
+            padding-top: 34px;
+        }
+        .head-ol{
+            width: 100%;
+
+             position: fixed;
+              top: 0px;
+              left: 0;
+        }
+        input{
+          border: none;
+            background-color: rgba(255,255,255,0);
+        }
+        .nulls{
+            font-size: 30px;
+            color: black;
+            font-weight: bold;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="head-ol">
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0);">首页</a></li>
+        <li><a href="javascript:void(0);">导航管理</a></li>
+        <li class="active">导航列表</li>
+    </ol>
+</div>
+
+<table class="table table-striped <?php echo count($result)?'':'hidden'; ?>">
+    <tr>
+        <th>序 号</th>
+        <th>导航名称</th>
+        <th>导航英文名称</th>
+        <th>导航优顺序编码</th>
+        <th>网页模板名称</th>
+        <th>操 作</th>
+    </tr>
+    <tbody>
+    <?php
+    foreach($result as $key=>$value){
+    ?>
+    <tr id="<?php   echo $value['lid']; ?>">
+
+        <td>
+           <?php
+           echo $value['lid']
+            ?>
+
+        </td>
+        <td>
+            <input name="lname" data-value="<?php
+           echo $value['lname'];?>" type="text" value="  <?php
+           echo $value['lname'];
+            ?>">
+
+        </td>
+        <td>
+            <input name="lEname" data-value="<?php
+           echo $value['lEname'];
+            ?>" type="text" value=" <?php
+           echo $value['lEname']
+            ?>">
+
+        </td>
+        <td>
+            <input name="nsort" data-value="<?php
+           echo $value['nsort'];
+            ?>" type="text" value=" <?php
+           echo $value['nsort']
+            ?>">
+
+        </td>
+        <td>
+            <input name="ntpl" data-value="<?php
+           echo $value['ntpl']
+            ?>" type="text" value="  <?php
+           echo $value['ntpl']
+            ?>">
+
+        </td>
+        <td>
+
+           <button class="btn btn-danger">删除</button>
+
+        </td>
+    </tr>
+    <?php
+    }
+    ?>
+
+    </tbody>
+</table>
+<div class="nulls <?php echo count($result)?'hidden':''; ?>">
+    空空如也什么没有
+</div>
+</body>
+</html>
+<script>
+    $("tbody").on("click","button",function () {
+
+      let lid =  $(this).closest("tr").attr("id");
+        // console.log(lid)
+        $.ajax({
+            type:"POST",
+            url:"delnavtion.php",
+            dataType:"json",
+            data:{
+                "lid":lid
+            },
+            success:function (res) {
+                if(res.success===200){
+                    alert(res.font);
+                    $("#"+lid).remove();
+                }
+                else{
+                    console.log(res.font);
+                    alert(res.font);
+                    location.reload();
+                }
+            }
+        });
+    })
+    $("tbody").on("blur","input",function(){
+           let name = this.name;
+           let value = this.value.trim();
+           let olddatavalue = this.dataset.data-value;
+    //寻找距离该标签最近的标签
+      let lid =  $(this).closest("tr").attr("id");
+   if(value == null || value == ""){
+       this.value = olddatavalue;
+       alert("修改的值不能为空");
+
+       return;
+   }
+   if(olddatavalue==value){
+      alert("数据未作修改");
+       this.value = olddatavalue;
+       return;
+   }
+   $.ajax({
+       type:"POST",
+       url:"updatanavtion.php",
+       dataType:"json",
+       data:{
+           "name":name,
+           "value":value,
+           "lid":lid
+       },
+       success:function (res) {
+          if(res.success===200){
+
+              alert(res.font);
+              olddatavalue = value;
+              }
+          else{
+              console.log(res.font);
+              alert(res.font);
+
+          }
+       }
+   });
+    });
+</script>
